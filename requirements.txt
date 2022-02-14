@@ -1,0 +1,6 @@
+# this file defines the pip packages neede by this application
+flask==2.0.2
+Flask-SQLAlchemy==2.4.0
+Jinja2
+psycopg2-binary
+SQLAlchemy
