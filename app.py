@@ -4,16 +4,17 @@ import datetime
 import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Messageboard(db.Model):
     __tablename__ = 'messages'
     id = db.Column(db.Integer, primary_key=True)
-    messages = db.Column(db.Text())
+    message_text = db.Column(db.Text())
     timestamp = db.Column(db.DateTime)
-    def __init__(self, messages,timestamp):
-       self.messages = messages
+
+    def __init__(self, message_text, timestamp):
+       self.message_text = message_text
        self.timestamp =timestamp
  
 db.create_all()
@@ -27,5 +28,5 @@ def home():
         data = Messageboard(new_message,timestamp)
         db.session.add(data)
         db.session.commit()
-    feedbacks = Messageboard.query.all()
-    return render_template('home.html', results=feedbacks)
+    messages = Messageboard.query.all()
+    return render_template('home.html', messages=messages)
