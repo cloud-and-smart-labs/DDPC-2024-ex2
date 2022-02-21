@@ -15,7 +15,7 @@ class Messageboard(db.Model):
 
     def __init__(self, message_text, timestamp):
        self.message_text = message_text
-       self.timestamp =timestamp
+       self.timestamp = timestamp
  
 db.create_all()
 db.session.commit()
